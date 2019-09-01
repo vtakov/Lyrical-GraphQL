@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
+import { graphql } from 'react-apollo';
+import likeLyric from '../queries/likeLyric.js';
 
 class LyricList extends Component {
     onLike(id) {
-
+        this.props.mutate({
+            variables: { id: id }
+        });
     }
 
     renderLyrics() {
@@ -14,6 +18,7 @@ class LyricList extends Component {
                         className="material-icons"
                         onClick={() => this.onLike(lyric.id)}
                     >thumb_up</i>
+                    {lyric.likes}
                 </li>
             );
         });
@@ -28,4 +33,4 @@ class LyricList extends Component {
     }
 }
 
-export default LyricList;
+export default graphql(likeLyric)(LyricList);
