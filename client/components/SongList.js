@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import { Link } from 'react-router';
 import fetchSongs from '../queries/fetchSongs.js'
+import deleteSong from '../queries/deleteSong.js';
 
 class SongList extends Component {
     renderSongs() {
@@ -32,4 +33,6 @@ class SongList extends Component {
     }
 }
 
-export default graphql(fetchSongs)(SongList);
+export default graphql(deleteSong)(
+    graphql(fetchSongs)(SongList)
+);
