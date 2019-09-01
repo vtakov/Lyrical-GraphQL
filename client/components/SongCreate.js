@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
+import gql from 'graphql-tag';
 
 class SongCreate extends Component {
     constructor(props) {
@@ -7,11 +7,16 @@ class SongCreate extends Component {
         this.state = { title: '' };
     }
 
+    onSubmit(event) {
+        event.preventDefault();
+
+    }
+
     render() {
         return (
             <div>
                 <h3>Create a new song</h3>
-                <form>
+                <form onSubmit={this.onSubmit.bind(this)}>
                     <label>Song title:</label>
                     <input
                         onChange={event => this.setState({ title: event.target.value })}
@@ -22,5 +27,14 @@ class SongCreate extends Component {
         );
     }
 }
+
+const mutation = gql`
+    mutation {
+      addSong(title: ) {
+        id
+        title
+      }
+    }
+`;
 
 export default SongCreate;
